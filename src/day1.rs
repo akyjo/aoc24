@@ -11,7 +11,7 @@ fn main() -> color_eyre::Result<()> {
 }
 
 fn part_one() {
-    let foo: (Vec<u32>, Vec<u32>) = include_str!("d1_p1.txt")
+    let foo: (Vec<u32>, Vec<u32>) = include_str!("1.in")
         .lines()
         .map(|l| {
             let mut it = l.split_whitespace();
@@ -32,7 +32,7 @@ fn part_one() {
 }
 
 fn part_two() {
-    let foo: (Vec<u32>, Vec<u32>) = include_str!("d1_p1.txt")
+    let foo: (Vec<u32>, Vec<u32>) = include_str!("1.in")
         .lines()
         .map(|l| {
             let mut it = l.split_whitespace();
@@ -60,7 +60,6 @@ fn part_two() {
         }
     }
 
-    //println!("{:#?}", left_frequencies);
     let answer = left_frequencies
         .into_iter()
         .filter(|entry| entry.1 > 0)
