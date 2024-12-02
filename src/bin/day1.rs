@@ -11,7 +11,7 @@ fn main() -> color_eyre::Result<()> {
 }
 
 fn part_one() {
-    let foo: (Vec<u32>, Vec<u32>) = include_str!("1.in")
+    let foo: (Vec<u32>, Vec<u32>) = include_str!("../data/1.in")
         .lines()
         .map(|l| {
             let mut it = l.split_whitespace();
@@ -32,7 +32,7 @@ fn part_one() {
 }
 
 fn part_two() {
-    let foo: (Vec<u32>, Vec<u32>) = include_str!("1.in")
+    let foo: (Vec<u32>, Vec<u32>) = include_str!("../data/1.in")
         .lines()
         .map(|l| {
             let mut it = l.split_whitespace();
