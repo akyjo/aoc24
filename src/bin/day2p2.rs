@@ -47,7 +47,7 @@ fn try_damper(report: &Vec<i32>) -> bool {
         })
         .values()
         .filter(|x| **x <= 1)
-        .fold(0, |acc, el| acc + el);
+        .sum::<i32>();
 
     valid_dampened <= 1
 }
