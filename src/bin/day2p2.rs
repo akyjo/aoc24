@@ -22,17 +22,13 @@ fn dampen_monotone(report: &Vec<i32>) -> bool {
     dbg!(report);
     let mut report_iter = report.iter();
     let first_sign = report_iter.next().take().unwrap().signum();
+
     match report_iter.all(|s| s.signum() == first_sign) {
         true => true,
         false => try_damper(report),
     }
 }
 
-///
-///    1        5       1       1
-///  (2 - 1) (7 - 2) (8 - 7) (9 - 8)
-/// 1       2       7       8       9
-///
 ///     2      -1       2       1
 ///  (3 - 1) (2 - 3) (4 - 2) (5 - 4)
 /// 1       3       2       4       5
@@ -59,8 +55,18 @@ fn allow_one_jump(report: &Vec<i32>) -> bool {
     }
 }
 
+///
+///    1        5       1       1
+///  (2 - 1) (7 - 2) (8 - 7) (9 - 8)
+/// 1       2       7       8       9
+///
 fn jump_damper(report: &Vec<i32>) -> bool {
-    let jump_count = report.iter().filter(|x| **x >= 4).collect::<Vec<_>>().len();
+    let jump_count = report
+        .iter() // iter? i dont even know her
+        .filter(|x| **x >= 4)
+        .collect::<Vec<_>>()
+        .len();
+
     jump_count <= 1_usize
 }
 
