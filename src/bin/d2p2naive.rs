@@ -19,8 +19,11 @@ fn read_line_nums(line: &str) -> Vec<i32> {
 }
 
 fn dampen_safety(report: &Vec<i32>) -> bool {
+    //dbg!(report);
     let diffs = report.windows(2).map(|w| w[0] - w[1]).collect::<Vec<_>>();
-    let safe = monotone(&diffs) && no_big_jumps(&diffs);
+    //dbg!(&diffs);
+    println!("{report:?  }");
+    let safe = dbg!(monotone(&diffs) && no_big_jumps(&diffs));
 
     if safe {
         return true;
@@ -29,7 +32,8 @@ fn dampen_safety(report: &Vec<i32>) -> bool {
     for i in 0..report.len() {
         let dampened_rep = {
             let mut cl = report.clone();
-            cl.remove(i);
+            cl.remove(i); // remove ith to create variant
+                          //println!("{:?}", &cl);
             cl
         };
 
@@ -37,8 +41,10 @@ fn dampen_safety(report: &Vec<i32>) -> bool {
             .windows(2)
             .map(|w| w[0] - w[1])
             .collect::<Vec<_>>();
-        let dampened_safe = monotone(&diffs) && no_big_jumps(&diffs);
+        let dampened_safe = dbg!(monotone(&diffs) && no_big_jumps(&diffs));
         if dampened_safe {
+            dbg!(report);
+            dbg!(&dampened_rep);
             return true;
         }
     }
