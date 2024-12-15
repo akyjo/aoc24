@@ -55,16 +55,7 @@ fn find_xmas(grid: &Vec<Vec<char>>, row: isize, col: isize, directions: &[(isize
 }
 
 fn p1(puzzle: &Puzzle) -> u32 {
-    let directions = vec![
-        (-1, -1),
-        (-1, 0),
-        (-1, 1),
-        (0, -1),
-        (0, 1),
-        (1, -1),
-        (1, 0),
-        (1, 1),
-    ];
+    let directions = vec![(-1, -1), (-1, 1), (1, -1), (1, 1)];
 
     let mut count = 0;
 
@@ -73,6 +64,54 @@ fn p1(puzzle: &Puzzle) -> u32 {
             if puzzle.grid[i][j] == 'X' {
                 count += find_xmas(&puzzle.grid, i as isize, j as isize, &directions);
             }
+        }
+    }
+
+    count
+}
+
+//(-1, -1),          (-1, 1),
+//             X
+//( 1, -1),         ( 1, 1),
+//
+//            M.S
+//            .A.
+//            M.S
+fn p2(puzzle: &Puzzle) -> u32 {
+    let directions = vec![(-1, -1), (-1, 1), (1, -1), (1, 1)];
+
+    let mut count = 0;
+
+    for i in 0..puzzle.grid.len() {
+        for j in 0..puzzle.grid[i].len() {
+            if puzzle.grid[i][j] == 'A' {
+                count += find_x_mas(&puzzle.grid, i as isize, j as isize, &directions);
+            }
+        }
+    }
+
+    count
+}
+
+fn find_x_mas(grid: &Vec<Vec<char>>, row: isize, col: isize, directions: &[(isize, isize)]) -> u32 {
+    let mut count = 0;
+
+    for &(dx, dy) in directions {
+        let mut r = row;
+        let mut c = col;
+        let mut matched = true;
+
+        if r < 0 || c < 0 || r >= grid.len() as isize || c >= grid[0].len() as isize {
+            matched = false;
+            break;
+        }
+        if grid[r as usize][c as usize] != ch {
+            matched = false;
+            break;
+        }
+
+        if matched {
+            count += 1;
         }
     }
 
